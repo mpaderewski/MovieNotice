@@ -1,22 +1,29 @@
-﻿using TMDbLib.Client;
+﻿using MovieNotice.API.Settings;
+using TMDbLib.Client;
 
 namespace MovieNotice.API.Data
 {
-    public class RemoteMovieApi : IRemoteMovieApi
+    public sealed class RemoteMovieApi : IRemoteMovieApi
     {
-        private static readonly Lazy<RemoteMovieApi> _lazy = new Lazy<RemoteMovieApi>( () => new RemoteMovieApi() );
+        
+        private readonly AuthenitactionSettings _authenitactionSettings;
         private TMDbClient _client;
 
-        public RemoteMovieApi()
+        public RemoteMovieApi(AuthenitactionSettings authenitactionSettings)
         {
-            _client = new TMDbClient("0064b34021951fd3ae08591131d3577d");
+            this._authenitactionSettings = authenitactionSettings;
+            _client = new TMDbClient(_authenitactionSettings.TMDbAuthKey);
+
         }
 
         public TMDbClient GetClient()
         {
-            return _lazy.Value._client;
+            if(_client == null )
+            {
+                _client = new TMDbClient(_authenitactionSettings.TMDbAuthKey);
+            }
+            return _client;
         }
-        public static RemoteMovieApi Instance { get { return _lazy.Value; } }
 
     }
 }

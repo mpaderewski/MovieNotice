@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../_services/auth/auth.service';
 import { TokenStorageService } from '../_services/tokenStorage/token-storage.service';
 
 @Component({
@@ -12,13 +15,24 @@ export class TopBarComponent implements OnInit {
   
   name = 'Angular';
   public isCollapsed = true;
-  isLoggedIn: boolean = false;
+  isLoggedIn: any;
+  public movieTitle: string = '';
 
-  constructor(private tokenStorage: TokenStorageService) {}
+  searchForm: FormGroup = this.builder.group({
+    movieTitle: this.movieTitle
+  });
+
+  constructor(private tokenStorage: TokenStorageService, private auth: AuthService, private builder: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
-    if(this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
+    this.isLoggedIn = this.auth.isLogged();
+    console.log(this.isLoggedIn);
+  }
+
+  searchMovie() {
+    if(this.searchForm.value.movieTitle) {
+      console.log(this.searchForm.value.movieTitle);
+      this.router.navigate(["searchMovies", this.searchForm.value.movieTitle]);
     }
   }
 }

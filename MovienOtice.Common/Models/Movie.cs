@@ -9,5 +9,7 @@ namespace MovieNotice.Common.Models
         public string Title { get; set; }
         public string PosterUrl { get; set; }
         public DateTime? ReleaseDate { get; set; }
+        public string BackdropPath { get; set; }
+        public double? Popularity { get; set; }
     }
 }

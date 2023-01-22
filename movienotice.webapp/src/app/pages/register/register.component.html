@@ -1,25 +1,46 @@
 <body class="text-center">
   <main class="form-signin w-100 m-auto">
-    <form>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
       <h1 class="h3 mb-3 fw-normal">Rejestracja</h1>
 
       <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input type="email" formControlName="email" required class="form-control" id="floatingInput" placeholder="name@example.com"  ngModel email>
         <label for="floatingInput">Adres email</label>
       </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Hasło">
-        <label for="floatingPassword">Hasło</label>
+      <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="validate-error">
+        <div *ngIf="email?.errors?.['required']">
+          Email jest wymagany.
+        </div>
+        <div *ngIf="email?.errors?.['email']">
+          To nie jest poprawny format adresu email.
+        </div>
       </div>
       <div class="form-floating">
-        <input type="repeat-password" class="form-control" id="floatingRepeatPassword" placeholder="Powtórz hasło">
+        <input type="password" formControlName="password" required class="form-control" id="floatingPassword" placeholder="Hasło">
+        <label for="floatingPassword">Hasło</label>
+      </div>
+      <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="validate-error">
+        <div *ngIf="password?.errors?.['required']">
+          Email jest wymagany.
+        </div>
+        <div *ngIf="password != repeatPassword">
+          Podane hasła nie są takie same.
+        </div>
+      </div>
+      <div class="form-floating">
+        <input type="password" formControlName="repeatPassword" required class="form-control" id="floatingRepeatPassword" placeholder="Powtórz hasło">
         <label for="floatingRepeatPassword">Powtórz hasło</label>
+      </div>
+      <div *ngIf="repeatPassword?.invalid && (repeatPassword?.dirty || repeatPassword?.touched)" class="validate-error">
+        <div *ngIf="repeatPassword?.errors?.['required']">
+          Hasło jest wymagane
+        </div>
+        <div *ngIf="password != repeatPassword">
+          Podane hasła nie są takie same.
+        </div>
       </div>
       <button class="w-100 btn btn-lg btn-primary" type="submit">Zarejestruj</button>
     </form>
-    <div *ngFor="let item of movies">
-      Name : {{ item.title }}
-  </div>
+    <p>Masz już konto? <a routerLink="/login">Zaloguj się</a> tutaj.</p>
   </main>
-
 </body>

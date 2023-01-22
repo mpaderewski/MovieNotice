@@ -5,6 +5,8 @@ export class Movie {
       public description: string = '',
       public title: string = '',
       public posterUrl: string = '',
-      public releaseDate: string = ''
+      public releaseDate: string = '',
+      public backdropPath: string = '',
+      public popularity: number = -1
     ) { }
   }

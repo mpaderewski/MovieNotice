@@ -6,7 +6,8 @@ import { TokenStorageService } from 'src/app/_services/tokenStorage/token-storag
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { EMPTY } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import jwt_decode from 'jwt-decode';
+import { AuthService } from 'src/app/_services/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -29,11 +30,13 @@ export class LoginComponent implements OnInit{
     password: this.password
   });
 
-  constructor(private accountService: AccountService, private builder: FormBuilder, private tokenStorage: TokenStorageService, private route: ActivatedRoute) { }
+  constructor(private accountService: AccountService, private builder: FormBuilder, private tokenStorage: TokenStorageService, 
+    private route: ActivatedRoute, private auth: AuthService, private toasters: ToastrService) { }
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      window.location.href="/"
+    this.isLoggedIn = this.auth.isLogged();
+    if (this.isLoggedIn) {
+      console.log(this.isLoggedIn);
+      //window.location.href="/"
     }
     else {
       this.route.params
@@ -56,15 +59,17 @@ export class LoginComponent implements OnInit{
        })
     ).subscribe((response) => {
       
-      let decoded = jwt_decode(response); 
-      console.log(decoded); 
-
       this.token = response;
       this.tokenStorage.saveToken(response);
       this.tokenStorage.saveUser(new UserLogin(this.loginForm.value.email, this.loginForm.value.password));
       this.isLoginFailed = false;
       this.isLoggedIn = true;
-      window.location.href="";
+      this.toasters.success('Za chwilę nastąpi przekierowanie do strony głównej.', 'Poprawnie zalogowano!');
+      setTimeout(() => {
+        setTimeout(() => {
+          window.location.href="";
+        });
+      }, 3000);        
     });
   } 
 }

@@ -1,0 +1,27 @@
+<div *ngIf="hasMovies()">
+  <div class="movie_card" id="bright" *ngFor="let movie of movies">
+    <div class="info_section">
+      <div class="movie_header">
+        <img class="locandina" src="https://image.tmdb.org/t/p/w154/{{movie.posterUrl}}" (error)="handleMissingImage($event)"/>
+        <h1>{{ movie.title }}</h1>
+        Popularność: {{movie.popularity}} <h4>{{ movie.releaseDate | date: 'yyyy-MM-dd'}}</h4>
+        <span class="minutes">666 min</span>
+        <p class="type">tu będą gatunki</p>
+      </div>
+      <div class="movie_desc">
+          {{ movie.description }}
+      </div>
+      <div class="movie_social">
+        <ul>
+          <li><i>ikonka dodania do listy</i></li>
+        </ul>
+      </div>
+    </div>
+    <div class="blur_back" style="background-image: url('https://image.tmdb.org/t/p/w780/{{movie.backdropPath}}');">
+
+    </div>
+  </div>
+</div>
+<div *ngIf="!hasMovies()" style="text-align:center">
+    Wyszukaj filmy aby je wyświetlić
+</div>

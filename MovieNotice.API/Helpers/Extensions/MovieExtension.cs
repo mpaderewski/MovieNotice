@@ -17,7 +17,9 @@ namespace MovieNotice.API.Helpers.Extensions
                 PosterUrl = movie.PosterPath,
                 Description = movie.Overview,
                 ImdbId = movie.ImdbId,
-                ReleaseDate = movie.ReleaseDate
+                ReleaseDate = movie.ReleaseDate,
+                BackdropPath = movie.BackdropPath,
+                Popularity = movie.Popularity
             };
         }
 
@@ -29,7 +31,9 @@ namespace MovieNotice.API.Helpers.Extensions
                 Title = movie.Title,
                 PosterUrl = movie.PosterPath,
                 Description = movie.Overview,
-                ReleaseDate = movie.ReleaseDate
+                ReleaseDate = movie.ReleaseDate,
+                BackdropPath = movie.BackdropPath,
+                Popularity = movie.Popularity
             };
         }
 

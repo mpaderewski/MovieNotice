@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AccountService } from 'src/app/_services/account/account.service';
 import { TokenStorageService } from 'src/app/_services/tokenStorage/token-storage.service';
 
@@ -10,10 +11,13 @@ import { TokenStorageService } from 'src/app/_services/tokenStorage/token-storag
 })
 export class LogoutComponent {
 
-  constructor(private router: Router, private accountService: AccountService, private tokenStorage: TokenStorageService) {
+  constructor(private router: Router, private accountService: AccountService, private tokenStorage: TokenStorageService,private toasters: ToastrService) {
     if(tokenStorage.getToken()) {
       tokenStorage.signOut();
-      router.navigate(['/login', 1]);
+      this.toasters.success('Poprawnie wylogowano!');
+      setTimeout(() => {
+        router.navigate(['/login', true]);
+    }, 1000);
     }
   }
 

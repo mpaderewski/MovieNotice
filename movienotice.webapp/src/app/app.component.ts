@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TokenStorageService } from './_services/tokenStorage/token-storage.service';
-
+import { Router } from '@angular/router';
+import { AuthService } from './_services/auth/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,9 +8,10 @@ import { TokenStorageService } from './_services/tokenStorage/token-storage.serv
 })
 export class AppComponent {
   title = 'movienotice.webapp';
-  token: string = '';
-  constructor(private tokenStorage: TokenStorageService) {
-    this.token = tokenStorage.getToken();
 
-  }
+  constructor(private auth: AuthService, private router: Router) {
+    if(!auth.isLogged()) {
+      router.navigate(['/login']);
+    }
+  } 
 }

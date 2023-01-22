@@ -16,6 +16,10 @@ export class RemoteMoviesService {
   getMovies(title: string) {
     return this.http.get<Movie[]>(AppSettings._API_URL + CONTROLLER + title);
   }
+
+  getPopularMovies() {
+    return this.http.get<Movie[]>(AppSettings._API_URL + CONTROLLER + 'Popular');
+  }
  
 }
 

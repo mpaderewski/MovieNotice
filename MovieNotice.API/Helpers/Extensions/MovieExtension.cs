@@ -24,7 +24,7 @@ namespace MovieNotice.API.Helpers.Extensions
         }
 
         public static Movie ConvertToCommonMovie(this TMDbLib.Objects.Search.SearchMovie movie)
-        {
+        {            
             return new Movie()
             {
                 Id = movie.Id,

@@ -28,5 +28,13 @@ namespace MovieNotice.API.Controllers
         {
             return await _remoteMovieService.GetAsync(title);
         }
+        
+
+        [HttpGet("Popular")]
+        public async Task<List<Movie>> GetGetMoviePopularListAsync()
+        {
+            return await _remoteMovieService.GetMoviePopularListAsync();
+        }
+        
     }
 }

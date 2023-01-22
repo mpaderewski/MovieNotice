@@ -6,6 +6,7 @@ namespace MovieNotice.API.Interfaces
     {
         public Task<Movie> GetAsync(int id);
         public Task<List<Movie>> GetAsync(string title);
+        public Task<List<Movie>> GetMoviePopularListAsync();
 
     }
 }

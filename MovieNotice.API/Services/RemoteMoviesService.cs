@@ -23,7 +23,13 @@ namespace MovieNotice.API.Services
         public async Task<List<Movie>> GetAsync(string title)
         {
             var movies = await _movieApi.GetClient().SearchMovieAsync(title, language: _language);
-            return movies.ConvertToCommonMovieICollection().OrderByDescending(x => x.Popularity).ThenByDescending(a => a.ReleaseDate).ToList();
-        } 
+            return movies.ConvertToCommonMovieICollection().OrderByDescending(x => x.Popularity).ToList();
+        }
+
+        public async Task<List<Movie>> GetMoviePopularListAsync()
+        {
+            var movies = await _movieApi.GetClient().GetMoviePopularListAsync(language: _language);
+            return movies.ConvertToCommonMovieICollection().ToList();
+        }
     }
 }

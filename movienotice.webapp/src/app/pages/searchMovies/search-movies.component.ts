@@ -21,12 +21,20 @@ export class SearchMoviesComponent implements OnInit{
       .subscribe(params => {
         console.log(params['title']);     
         if(params['title'] != undefined) {
-          console.log('response');
           this.remoteMoviesService.getMovies(params['title']).subscribe((response) => {
             this.movies = response;
             if(this.movies.length <= 0) {
               this.toasters.warning('Dla frazy: <b>' + params['title'].toString() + '</b> nic nie odnaleziono. Spróbuj wpisać innymi słowami.', 'Nie znaleziono żadnego filmu');
             }          
+          });
+        }
+        else {
+          console.log(this.route);
+          this.remoteMoviesService.getPopularMovies().subscribe((response) => {
+            this.movies = response;
+            if(this.movies.length <= 0) {
+              this.toasters.warning('Nie udało się załadować aktualnie popularnych filmów.', 'Nie znaleziono żadnego filmu');
+            }    
           });
         }
       });   

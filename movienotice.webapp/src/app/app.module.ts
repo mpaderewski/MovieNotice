@@ -9,7 +9,6 @@ import { ToastrModule } from "ngx-toastr";
 
 
 
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TopBarComponent } from './top-bar/top-bar.component';

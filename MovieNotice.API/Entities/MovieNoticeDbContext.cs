@@ -7,7 +7,10 @@ namespace MovieNotice.API.Entities
     {
         private readonly ConnectionStringsSettings _connectionStrings;
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Movie> Movie { get; set; }
+        public DbSet<MoviesList> MoviesList { get; set; }
+
 
         public MovieNoticeDbContext(ConnectionStringsSettings connectionStrings)
         {

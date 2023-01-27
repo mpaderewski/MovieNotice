@@ -18,7 +18,7 @@ namespace MovieNotice.API.Services.Validators
             RuleFor(x => x.ConfirmPassword).Equal(e => e.Password);
             RuleFor(x => x.Email).Custom((value, context) =>
             {
-                if(dbContext.Users.Any(u => u.Email == value))
+                if(dbContext.User.Any(u => u.Email == value))
                 {
                     context.AddFailure("Email", "Istnieje konto z takim mailem");
                 }

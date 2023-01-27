@@ -13,8 +13,9 @@ import { RemoteMoviesService } from 'src/app/_services/remoteMovies/remoteMovies
 export class SearchMoviesComponent implements OnInit{
 
   movies: Movie[] = [];
-
-  constructor(private remoteMoviesService: RemoteMoviesService, private route: ActivatedRoute, private toasters: ToastrService) {}
+  constructor(private remoteMoviesService: RemoteMoviesService, private route: ActivatedRoute, private toasters: ToastrService) {
+    
+  }
 
   ngOnInit(): void {
     this.route.params

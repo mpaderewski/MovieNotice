@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieNotice.API.Interfaces;
-using MovieNotice.Common.Models;
+using MovieNotice.Common.ModelsDto;
 
 namespace MovieNotice.API.Controllers
 {
@@ -18,20 +19,20 @@ namespace MovieNotice.API.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<Movie> GetAsync(int id)
+        public async Task<MovieDto> GetAsync(int id)
         {
             return await _remoteMovieService.GetAsync(id);
         }
 
         [HttpGet("{title}")]
-        public async Task<List<Movie>> GetAsync(string title)
+        public async Task<List<MovieDto>> GetAsync(string title)
         {
             return await _remoteMovieService.GetAsync(title);
         }
         
 
         [HttpGet("Popular")]
-        public async Task<List<Movie>> GetGetMoviePopularListAsync()
+        public async Task<List<MovieDto>> GetGetMoviePopularListAsync()
         {
             return await _remoteMovieService.GetMoviePopularListAsync();
         }

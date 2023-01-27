@@ -28,7 +28,7 @@ namespace MovieNotice.API.Services
 
         public string? GenerateJwt(LoginDto dto)
         {
-            var user = _context.Users.FirstOrDefault(x => x.Email == dto.Email);
+            var user = _context.User.FirstOrDefault(x => x.Email == dto.Email);
 
             if (user == null) 
             {
@@ -71,7 +71,7 @@ namespace MovieNotice.API.Services
             };
 
             user.PasswordHash = _passwordHasher.HashPassword(user, dto.Password);
-            _context.Users.Add(user);
+            _context.User.Add(user);
             _context.SaveChanges();
         }
     }

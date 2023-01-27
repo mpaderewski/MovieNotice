@@ -1,7 +1,6 @@
-﻿
-namespace MovieNotice.Common.Models
+﻿namespace MovieNotice.Common.ModelsDto
 {
-    public class Movie
+    public class MovieDto
     {
         public int Id { get; set; }
         public string ImdbId { get; set; }

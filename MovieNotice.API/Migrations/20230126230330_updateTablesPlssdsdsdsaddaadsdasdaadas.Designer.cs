@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieNotice.API.Entities;
 
@@ -11,9 +12,11 @@ using MovieNotice.API.Entities;
 namespace MovieNotice.API.Migrations
 {
     [DbContext(typeof(MovieNoticeDbContext))]
-    partial class MovieNoticeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230126230330_updateTablesPlssdsdsdsaddaadsdasdaadas")]
+    partial class updateTablesPlssdsdsdsaddaadsdasdaadas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,7 +91,7 @@ namespace MovieNotice.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MoviesList");
+                    b.ToTable("FollowedMovies");
                 });
 
             modelBuilder.Entity("MovieNotice.API.Entities.User", b =>

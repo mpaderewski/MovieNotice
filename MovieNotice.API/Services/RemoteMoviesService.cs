@@ -1,7 +1,8 @@
-﻿using MovieNotice.API.Data;
+﻿using AutoMapper;
+using MovieNotice.API.Data;
 using MovieNotice.API.Helpers.Extensions;
 using MovieNotice.API.Interfaces;
-using MovieNotice.Common.Models;
+using MovieNotice.Common.ModelsDto;
 
 namespace MovieNotice.API.Services
 {
@@ -9,27 +10,31 @@ namespace MovieNotice.API.Services
     {
         private readonly IRemoteMovieApi _movieApi;
         private readonly string _language = "pl-PL";
+        private readonly IMapper _mapper;
 
-        public RemoteMoviesService(IRemoteMovieApi movieApi) 
+        public RemoteMoviesService(IRemoteMovieApi movieApi, IMapper mapper) 
         {
             _movieApi = movieApi;
+            _mapper = mapper;
         }
-        public async Task<Movie> GetAsync(int id)
+        public async Task<MovieDto> GetAsync(int id)
         {
             var movie = await _movieApi.GetClient().GetMovieAsync(id);
-            return movie.ConvertToCommonMovie();
+            return _mapper.Map<MovieDto>(movie);
         }
 
-        public async Task<List<Movie>> GetAsync(string title)
+        public async Task<List<MovieDto>> GetAsync(string title)
         {
             var movies = await _movieApi.GetClient().SearchMovieAsync(title, language: _language);
-            return movies.ConvertToCommonMovieICollection().OrderByDescending(x => x.Popularity).ToList();
+            var moviesDtoList = _mapper.Map<List<MovieDto>>(movies.Results.OrderByDescending(x => x.Popularity).ToList());
+            return moviesDtoList;
         }
 
-        public async Task<List<Movie>> GetMoviePopularListAsync()
+        public async Task<List<MovieDto>> GetMoviePopularListAsync()
         {
             var movies = await _movieApi.GetClient().GetMoviePopularListAsync(language: _language);
-            return movies.ConvertToCommonMovieICollection().ToList();
+            var moviesDtoList = _mapper.Map<List<MovieDto>>(movies.Results.ToList());
+            return moviesDtoList;
         }
     }
 }

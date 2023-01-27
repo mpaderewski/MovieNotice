@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using MovieNotice.API.Interfaces;
 using MovieNotice.Common.ModelsDto;
 
@@ -12,7 +13,7 @@ namespace MovieNotice.API.Controllers
     {
         private readonly IAccountService _accountService;
 
-        public AccountController(IAccountService accountService) 
+        public AccountController(IMapper mapper, IAccountService accountService) 
         {
             _accountService = accountService;
         }

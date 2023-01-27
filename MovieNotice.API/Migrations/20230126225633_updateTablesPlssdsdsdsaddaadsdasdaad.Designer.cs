@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieNotice.API.Entities;
 
@@ -11,9 +12,11 @@ using MovieNotice.API.Entities;
 namespace MovieNotice.API.Migrations
 {
     [DbContext(typeof(MovieNoticeDbContext))]
-    partial class MovieNoticeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230126225633_updateTablesPlssdsdsdsaddaadsdasdaad")]
+    partial class updateTablesPlssdsdsdsaddaadsdasdaad
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +44,6 @@ namespace MovieNotice.API.Migrations
                     b.Property<string>("ImdbId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MovieStatus")
-                        .HasColumnType("int");
 
                     b.Property<int?>("MoviesListId")
                         .HasColumnType("int");
@@ -83,12 +83,15 @@ namespace MovieNotice.API.Migrations
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
+                    b.Property<int>("MovieStatus")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("MoviesList");
+                    b.ToTable("FollowedMovies");
                 });
 
             modelBuilder.Entity("MovieNotice.API.Entities.User", b =>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieNotice.API.Entities;
 
@@ -11,9 +12,11 @@ using MovieNotice.API.Entities;
 namespace MovieNotice.API.Migrations
 {
     [DbContext(typeof(MovieNoticeDbContext))]
-    partial class MovieNoticeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230126204205_updateTables")]
+    partial class updateTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,28 @@ namespace MovieNotice.API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MovieNotice.API.Entities.Movie", b =>
+            modelBuilder.Entity("MovieNotice.API.Entities.FollowedMovies", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MovieStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("FollowedMovies");
+                });
+
+            modelBuilder.Entity("MovieNotice.API.Entities.Movies", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,15 +62,12 @@ namespace MovieNotice.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("FollowedMoviesId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImdbId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MovieStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MoviesListId")
-                        .HasColumnType("int");
 
                     b.Property<double?>("Popularity")
                         .HasColumnType("float");
@@ -67,28 +88,9 @@ namespace MovieNotice.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MoviesListId");
+                    b.HasIndex("FollowedMoviesId");
 
-                    b.ToTable("Movie");
-                });
-
-            modelBuilder.Entity("MovieNotice.API.Entities.MoviesList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MoviesList");
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("MovieNotice.API.Entities.User", b =>
@@ -113,17 +115,26 @@ namespace MovieNotice.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MovieNotice.API.Entities.Movie", b =>
+            modelBuilder.Entity("MovieNotice.API.Entities.FollowedMovies", b =>
                 {
-                    b.HasOne("MovieNotice.API.Entities.MoviesList", null)
-                        .WithMany("Movies")
-                        .HasForeignKey("MoviesListId");
+                    b.HasOne("MovieNotice.API.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("MovieNotice.API.Entities.MoviesList", b =>
+            modelBuilder.Entity("MovieNotice.API.Entities.Movies", b =>
+                {
+                    b.HasOne("MovieNotice.API.Entities.FollowedMovies", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("FollowedMoviesId");
+                });
+
+            modelBuilder.Entity("MovieNotice.API.Entities.FollowedMovies", b =>
                 {
                     b.Navigation("Movies");
                 });

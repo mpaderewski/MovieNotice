@@ -51,6 +51,7 @@ builder.Services.AddAuthentication(option =>
 });
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -59,6 +60,7 @@ builder.Services.AddSingleton(authenitactionSettings);
 builder.Services.AddSingleton(connectionSettings);
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IRemoteMoviesService, RemoteMoviesService>();
+builder.Services.AddScoped<IUserMoviesService, UserMoviesService>();
 builder.Services.AddDbContext<MovieNoticeDbContext>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
@@ -67,11 +69,11 @@ builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
-//}
+}
 app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);

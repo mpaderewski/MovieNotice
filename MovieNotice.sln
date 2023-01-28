@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieNotice.API", "MovieNotice.API\MovieNotice.API.csproj", "{65C19EA9-61A8-4914-ACB3-1BEC0364BB24}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieNotice.Common", "MovienOtice.Common\MovieNotice.Common.csproj", "{68B6603D-48B8-4126-9B48-549FBF049FAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieNotice.Common", "MovieNotice.Common\MovieNotice.Common.csproj", "{68B6603D-48B8-4126-9B48-549FBF049FAD}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "movienotice.webapp", "movienotice.webapp\movienotice.webapp.esproj", "{DF5B9896-A448-4FDE-8467-4B85936C4563}"
 EndProject

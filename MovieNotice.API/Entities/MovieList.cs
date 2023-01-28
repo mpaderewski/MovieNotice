@@ -2,7 +2,7 @@
 
 namespace MovieNotice.API.Entities
 {
-    public class MoviesList
+    public class MovieList
     {
         public int Id { get; set; }
         public List<Movie> Movies { get; set; }

@@ -18,9 +18,9 @@ namespace MovieNotice.API.Controllers
             _accountService = accountService;
         }
         [HttpPost("register")]
-        public ActionResult RegisterUserAsync([FromBody]RegisterUserDto dto)
+        public ActionResult RegisterUser([FromBody]RegisterUserDto dto)
         {
-            _accountService.RegisterUserAsync(dto);
+            _accountService.RegisterUser(dto);
             return Ok();
         }
 

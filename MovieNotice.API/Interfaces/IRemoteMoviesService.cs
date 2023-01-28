@@ -4,9 +4,9 @@ namespace MovieNotice.API.Interfaces
 {
     public interface IRemoteMoviesService
     {
-        public Task<MovieDto> GetAsync(int id);
-        public Task<List<MovieDto>> GetAsync(string title);
-        public Task<List<MovieDto>> GetMoviePopularListAsync();
+        public Task<MovieDto> GetMovieAsync(int id);
+        public Task<List<MovieDto>> GetMoviesAsync(string title);
+        public Task<List<MovieDto>> GetMoviesPopularListAsync();
 
     }
 }

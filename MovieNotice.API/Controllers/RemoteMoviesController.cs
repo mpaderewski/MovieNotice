@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieNotice.API.Interfaces;
 using MovieNotice.Common.ModelsDto;
+using System.Security.Claims;
 
 namespace MovieNotice.API.Controllers
 {
@@ -13,28 +13,53 @@ namespace MovieNotice.API.Controllers
     {
         private readonly IRemoteMoviesService _remoteMovieService;
 
+        private readonly string? userId;
+
         public RemoteMoviesController(IRemoteMoviesService remoteMovieService)
         {
             _remoteMovieService = remoteMovieService;
+            userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         }
 
         [HttpGet("{id:int}")]
-        public async Task<MovieDto> GetAsync(int id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(MovieDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> GetMovie(int id)
         {
-            return await _remoteMovieService.GetAsync(id);
+            var movie = await _remoteMovieService.GetMovieAsync(id);
+            if(movie == null)
+            {
+                return NotFound();
+            }
+            return Ok(movie);
         }
 
         [HttpGet("{title}")]
-        public async Task<List<MovieDto>> GetAsync(string title)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MovieDto>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> GetMovies(string title)
         {
-            return await _remoteMovieService.GetAsync(title);
+            var movieList = await _remoteMovieService.GetMoviesAsync(title);
+            if(movieList == null)
+            {
+                return NotFound();
+            }
+            return Ok(movieList);
         }
         
 
         [HttpGet("Popular")]
-        public async Task<List<MovieDto>> GetGetMoviePopularListAsync()
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MovieDto>))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult> GetGetMoviePopularList()
         {
-            return await _remoteMovieService.GetMoviePopularListAsync();
+            var movieList = await _remoteMovieService.GetMoviesPopularListAsync();
+            if(movieList == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(movieList);
         }
         
     }

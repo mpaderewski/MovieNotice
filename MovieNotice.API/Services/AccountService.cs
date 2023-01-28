@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MovieNotice.API.Entities;
 using MovieNotice.API.Interfaces;
 using MovieNotice.API.Settings;
 using MovieNotice.Common.ModelsDto;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net;
 using System.Security.Claims;
 using System.Text;
 
@@ -48,7 +46,8 @@ namespace MovieNotice.API.Services
                 new Claim(ClaimTypes.Email, user.Email.ToString())
             };
 
-        
+           
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenitactionSettings.JwtKey));
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var expires = DateTime.Now.AddDays(_authenitactionSettings.JwtExpireDays);
@@ -62,7 +61,7 @@ namespace MovieNotice.API.Services
 
         }
 
-        public void RegisterUserAsync(RegisterUserDto dto)
+        public void RegisterUser(RegisterUserDto dto)
         {
             var user = new User()
             {

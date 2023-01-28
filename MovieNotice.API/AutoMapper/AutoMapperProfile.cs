@@ -9,7 +9,7 @@ namespace MovieNotice.API.AutoMapper
         public AutoMapperProfile() 
         {
             CreateMap<Movie, MovieDto>();
-            CreateMap<MoviesList, MoviesListDto>();
+            CreateMap<MovieList, MoviesListDto>();
             CreateMap<Movie, MovieToListDto>();
 
             CreateMap<TMDbLib.Objects.Movies.Movie, MovieDto>()

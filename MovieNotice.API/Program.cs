@@ -60,11 +60,11 @@ builder.Services.AddSingleton(authenitactionSettings);
 builder.Services.AddSingleton(connectionSettings);
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IRemoteMoviesService, RemoteMoviesService>();
-builder.Services.AddScoped<IUserMoviesService, UserMoviesService>();
+builder.Services.AddScoped<IMovieListService, MovieListService>();
 builder.Services.AddDbContext<MovieNoticeDbContext>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
-
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MovieNotice.API.Interfaces;
 using MovieNotice.Common.ModelsDto;
@@ -9,11 +10,11 @@ namespace MovieNotice.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountController : ControllerBaseAuth
     {
         private readonly IAccountService _accountService;
 
-        public AccountController(IMapper mapper, IAccountService accountService) 
+        public AccountController(IMapper mapper, IAccountService accountService, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
             _accountService = accountService;
         }

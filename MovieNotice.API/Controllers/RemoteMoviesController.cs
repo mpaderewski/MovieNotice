@@ -8,14 +8,13 @@ namespace MovieNotice.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
-    public class RemoteMoviesController : ControllerBase
+    public class RemoteMoviesController : ControllerBaseAuth
     {
         private readonly IRemoteMoviesService _remoteMovieService;
 
         private readonly string? userId;
 
-        public RemoteMoviesController(IRemoteMoviesService remoteMovieService)
+        public RemoteMoviesController(IRemoteMoviesService remoteMovieService, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
             _remoteMovieService = remoteMovieService;
             userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

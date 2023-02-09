@@ -24,7 +24,7 @@ namespace MovieNotice.API.Services
             return _mapper.Map<MoviesListDto>(list);
         }
 
-        public List<MoviesListDto> GetLists(int userId)
+        public List<MoviesListDto>? GetLists(int userId)
         {
             var lists = _context.MoviesList.Include(x => x.Movies).Where(x => x.UserId == userId).ToList();
             return _mapper.Map<List<MoviesListDto>>(lists);

@@ -10,11 +10,11 @@ namespace MovieNotice.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBaseAuth
+    public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
 
-        public AccountController(IMapper mapper, IAccountService accountService, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+        public AccountController(IMapper mapper, IAccountService accountService, IHttpContextAccessor httpContextAccessor)
         {
             _accountService = accountService;
         }

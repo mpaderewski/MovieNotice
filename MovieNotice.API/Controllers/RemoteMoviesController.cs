@@ -12,12 +12,12 @@ namespace MovieNotice.API.Controllers
     {
         private readonly IRemoteMoviesService _remoteMovieService;
 
-        private readonly string? userId;
+        private readonly int? userId;
 
         public RemoteMoviesController(IRemoteMoviesService remoteMovieService, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
             _remoteMovieService = remoteMovieService;
-            userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            userId = base.GetUserId();
         }
 
         [HttpGet("{id:int}")]

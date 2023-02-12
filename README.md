@@ -15,6 +15,6 @@ W planach:
 Wersja demonstracyjna jest dostępna pod adresem: http://demo.movienotice.site 
 Konto testowe: demo@movienotice.site hasło: Demoqwerty
 
-Mail nie jest w żaden sposób weryfikowany więc wystarczy wystarczy podać poprawny według patternu nazwa@domena.
+Podczas rejestracji mail nie jest w żaden sposób weryfikowany więc wystarczy wystarczy podać poprawny według patternu nazwa@domena.
 
 Do wyszukiwania filmów używam API https://www.themoviedb.org/ wraz z biblioteką https://github.com/LordMike/TMDbLib 

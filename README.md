@@ -1,6 +1,6 @@
 # MovieNotice
 
-Projekt wyszukujący oraz śledzący najnowsze premiery filmowe na podstawie aktorów, gatunków, nazw filmów.
+Projekt wyszukujący oraz śledzący najnowsze premiery filmowe na podstawie aktorów, gatunków oraz nazw filmów.
 Aktualnie dostepne funkcje:
 - Rejestracja (bez weryfikacji kont)
 - Logowanie

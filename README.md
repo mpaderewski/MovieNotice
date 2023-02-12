@@ -12,7 +12,7 @@ W planach:
 - Tworzenie własnych list obserwujących wraz z udostępnianiem tych list innym użytkownikom
 - Aplikacja mobilna przy użyciu .NET MAUI
 
-Wersja demonstracyjna jest dostępna pod adresem: demo.movienotice.site 
+Wersja demonstracyjna jest dostępna pod adresem: http://demo.movienotice.site 
 Konto testowe: demo@movienotice.site hasło: Demoqwerty
 
 Mail nie jest w żaden sposób weryfikowany więc wystarczy wystarczy podać poprawny według patternu nazwa@domena.

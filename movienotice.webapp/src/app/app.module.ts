@@ -20,6 +20,7 @@ import { errorCatchingInterceptorProviders } from './_helpers/error-catching.int
 import { LogoutComponent } from './pages/logout/logout.component';
 import { SearchMoviesComponent } from './pages/searchMovies/search-movies.component';
 import { AuthService } from './_services/auth/auth.service';
+import { UserComponent } from './pages/user/user.component';
 
 @NgModule({
   declarations: [
@@ -29,11 +30,12 @@ import { AuthService } from './_services/auth/auth.service';
     RegisterComponent,
     AboutComponent,
     LogoutComponent,
-    SearchMoviesComponent
+    SearchMoviesComponent,
+    UserComponent
   ],
   imports: [
-    BrowserModule, 
-    FormsModule, 
+    BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     NgbCollapseModule,
     HttpClientModule,
@@ -45,7 +47,8 @@ import { AuthService } from './_services/auth/auth.service';
       { path: 'about', component: AboutComponent },
       { path: 'logout', component: LogoutComponent},
       { path: 'searchMovies', component: SearchMoviesComponent},
-      { path: 'searchMovies/:title', component: SearchMoviesComponent}
+      { path: 'searchMovies/:title', component: SearchMoviesComponent},
+      { path: 'user', component: UserComponent}
 ]),
     BrowserAnimationsModule,
     ToastrModule.forRoot({

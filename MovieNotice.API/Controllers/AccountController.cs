@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MovieNotice.API.Interfaces;
 using MovieNotice.Common.ModelsDto;
-
-//using System.Text.Json;
 
 namespace MovieNotice.API.Controllers
 {
@@ -26,6 +23,8 @@ namespace MovieNotice.API.Controllers
         }
 
         [HttpPost("login")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public ActionResult Login([FromBody]LoginDto dto)
         {
             var tokenResult = _accountService.GenerateJwt(dto);

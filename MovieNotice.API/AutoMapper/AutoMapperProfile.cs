@@ -11,6 +11,7 @@ namespace MovieNotice.API.AutoMapper
             CreateMap<Movie, MovieDto>();
             CreateMap<MovieList, MoviesListDto>();
             CreateMap<Movie, MovieToListDto>();
+            CreateMap<User, UserDto>();
 
             CreateMap<TMDbLib.Objects.Movies.Movie, MovieDto>()
                 .ForMember(dest => dest.PosterUrl, opt => opt.MapFrom(src => src.PosterPath))

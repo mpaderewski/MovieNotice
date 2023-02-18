@@ -62,6 +62,7 @@ builder.Services.AddSingleton(connectionSettings);
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IRemoteMoviesService, RemoteMoviesService>();
 builder.Services.AddScoped<IMovieListService, MovieListService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddDbContext<MovieNoticeDbContext>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();

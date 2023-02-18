@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit{
     password: this.password
   });
 
-  constructor(private accountService: AccountService, private builder: FormBuilder, private tokenStorage: TokenStorageService, 
+  constructor(private accountService: AccountService, private builder: FormBuilder, private tokenStorage: TokenStorageService,
     private route: ActivatedRoute, private auth: AuthService, private toasters: ToastrService) { }
   ngOnInit(): void {
     this.isLoggedIn = this.auth.isLogged();
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit{
       this.route.params
       .subscribe(params => {
         console.log(params['refresh']);
-        
+
         if(params['refresh']) {
           console.log('if');
           window.location.href="/login"
@@ -54,11 +54,11 @@ export class LoginComponent implements OnInit{
   login() {
     console.log(this.loginForm.value);
     this.accountService.signInUser(new UserLogin(this.loginForm.value.email, this.loginForm.value.password)).pipe(
-      catchError(() => { 
+      catchError(() => {
         return EMPTY;
        })
     ).subscribe((response) => {
-      
+
       this.token = response;
       this.tokenStorage.saveToken(response);
       this.tokenStorage.saveUser(new UserLogin(this.loginForm.value.email, this.loginForm.value.password));
@@ -67,9 +67,9 @@ export class LoginComponent implements OnInit{
       this.toasters.success('Za chwilę nastąpi przekierowanie do strony głównej.', 'Poprawnie zalogowano!');
       setTimeout(() => {
         setTimeout(() => {
-          window.location.href="";
+          window.location.href="/";
         });
-      }, 3000);        
+      }, 3000);
     });
-  } 
+  }
 }
